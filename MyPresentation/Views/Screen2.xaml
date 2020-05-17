@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="MyPresentation.Views.Screen2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyPresentation.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             Height="750" Width="950" Background="#4F008C">
+    <UserControl.Resources>
+        <Style x:Key="LanguageButton" TargetType="Button">
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.Column="0"
+            FontSize="25" 
+            Foreground="#fff"
+            HorizontalAlignment="Center" 
+            Width="270" Grid.ColumnSpan="2" Margin="94,193,270,0">
+            Choose your service
+        </Label>
+        <Button 
+            Style="{StaticResource LanguageButton}" Grid.Column="0"
+            Command="{Binding BillButtonClicked}" CommandParameter="WelcomePageView"
+            FontSize="35"
+            HorizontalContentAlignment="Left"
+            Width="250" Height="250" Margin="0,0,195,0" Grid.ColumnSpan="2">
+            <StackPanel>
+                <Image
+                    Width="50" 
+                    Height="50" 
+                    HorizontalAlignment="Left" 
+                    Source="/MyPresentation;component/Image/bill-payment.png"/>
+                <TextBlock Text="Bill &#xA;Payment"/>
+            </StackPanel>
+
+        </Button>
+
+        <Button
+            Command="{Binding LineRechargeButton}"
+            Style="{StaticResource LanguageButton}"
+            Grid.Column="1"
+            FontSize="35"            
+            Width="250" Height="250">
+            <StackPanel>
+                <Image
+                    Width="50" 
+                    Height="50" 
+                    HorizontalAlignment="Left"
+                    Source="/MyPresentation;component/Image/lineRecharge.png"/>
+                <TextBlock Text="Line &#xA;Recharge"/>
+            </StackPanel>
+        </Button>
+        <Button
+            Command="{Binding SimReplace}"
+            Style="{StaticResource LanguageButton}"
+            Width="250"
+            Height="250"
+            Grid.Column="1"
+            FontSize="35" Margin="195,0,0,0" Grid.ColumnSpan="2">
+            <StackPanel>
+                <Image
+                    Width="50"
+                    Height="50"
+                    HorizontalAlignment="Left"
+                    Source="/MyPresentation;component/Image/Sim.png"/>
+                <TextBlock Text="SIM &#xA;Replacement"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</UserControl>

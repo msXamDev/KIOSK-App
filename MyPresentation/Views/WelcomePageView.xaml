@@ -1,0 +1,366 @@
+﻿<UserControl x:Class="MyPresentation.Views.WelcomePageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"    
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyPresentation.Views"
+             Height="750" Width="950">
+    <UserControl.Resources>
+        <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox Text="{Binding Path=Text,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 x:Name="textSource" 
+                                 Background="Transparent" 
+                                 Panel.ZIndex="2" />
+                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
+                                <TextBox.Resources>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="Gray"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="15"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid  Background="#390166" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Bill-->
+                <RowDefinition Height="Auto"/>
+                <!--progress -->
+                <RowDefinition Height="Auto"/>
+                <!--label ac details -->
+                <RowDefinition Height="Auto"/>
+                <!--image -->
+                <RowDefinition Height="Auto"/>
+                <!--Button-->
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.ColumnSpan="7" Foreground="White" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center">Bill Payment</Label>
+            <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" Name="MySeparator" 
+               Height="7"      
+                       Margin="20,0,20,0"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Center"                       
+               Background="White" />
+            <Ellipse Grid.Row="1" Grid.Column="1"
+          Canvas.Top="5"
+          Canvas.Left="5"
+          Fill="SeaGreen"
+          Height="30"
+          Width="30"
+          StrokeThickness="1"
+          Stroke="White"/>
+            <TextBlock Foreground="White" Grid.Row="1" Grid.Column="1" Text="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Ellipse Grid.Row="1" Grid.Column="3"
+          Canvas.Top="5"
+          Canvas.Left="5"          
+          Height="30"
+          Width="30"      
+          Fill="#390166"
+          StrokeThickness="1"
+          Stroke="White"/>
+            <TextBlock Foreground="White" Grid.Row="1" Grid.Column="3" Text="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Ellipse Grid.Row="1" Grid.Column="5"
+          Canvas.Top="5"
+          Canvas.Left="5"          
+          Height="30"
+          Width="30"
+          Fill="#390166"
+          StrokeThickness="1"
+          Stroke="White"/>
+            <TextBlock Foreground="White" Grid.Row="1" Grid.Column="5" Text="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Foreground="White" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center">Account Detail</Label>
+            <Image Margin="20" Source="/MyPresentation;component/Image/tab.png" Stretch="None"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="7"></Image>
+            <Button Margin="0,0,20,0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Width="150" Height="70" FontSize="22" Foreground="White" Background="#390166" BorderThickness="2.5" BorderBrush="Red">Cancel
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="7,0,0,7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Command="{Binding Screen3BackButton}"
+                    CommandParameter="Screen2"
+                    Margin="20,0,0,0"  
+                    Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="4" 
+                    FontSize="22"  Foreground="White" Background="#390166"
+                    Width="150" Height="70" BorderThickness="2.5" BorderBrush="Orange">
+                Back
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="0,7,7,0"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+        <Grid  Background="#4F008D" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"  
+                     Text="{Binding Path=DisplayWordInTextbox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Height="60" 
+                     Width="450"     
+                     FontSize="24"
+                     VerticalAlignment="Center" 
+                     HorizontalAlignment="Center" 
+                     TextAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"
+                     x:Name="SearchTermTextBox" 
+                     Margin="20">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" 
+                       IsHitTestVisible="False" Text="Enter your number" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" 
+                       Margin="20,0,0,0" 
+                       FontSize="24" 
+                       Foreground="DarkGray">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <Button Grid.Row="1" Grid.Column="1"    
+                    Command="{Binding One}" CommandParameter="1"
+                    Width="70" 
+                    Height="70" 
+                    FontSize="38" 
+                    Foreground="White" 
+                    Background="#611B98">1
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="2"        
+                     Command="{Binding Two}" CommandParameter="2"
+                    Width="70" 
+                    Height="70" 
+                    FontSize="38" 
+                    Foreground="White" 
+                    Background="#611B98">2
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="3"     
+                     Command="{Binding Three}" CommandParameter="3"
+                    Width="70" 
+                    Height="70" 
+                    FontSize="38" 
+                    Foreground="White" 
+                    Background="#611B98">3
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="1"  
+                     Command="{Binding Four}" CommandParameter="4"
+                    Width="70" 
+                    Height="70" 
+                    FontSize="38" 
+                    Foreground="White" 
+                    Background="#611B98">4
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="2"  
+                     Command="{Binding Five}" CommandParameter="5"
+                    Width="70" 
+                    Height="70" 
+                    FontSize="38" 
+                    Foreground="White" 
+                    Background="#611B98">5
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="3"  
+                     Command="{Binding Six}" CommandParameter="6"
+                    Width="70" 
+                    Height="70" 
+                    FontSize="38" 
+                    Foreground="White" 
+                    Background="#611B98">6
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="3" Grid.Column="1"   
+                     Command="{Binding Seven}" CommandParameter="7"
+                    Width="70" 
+                    Height="70" 
+                    FontSize="38" 
+                    Foreground="White" 
+                    Background="#611B98">7
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="3" Grid.Column="2"  
+                     Command="{Binding Eight}" CommandParameter="8"
+                    Width="70" 
+                    Height="70" 
+                    FontSize="38" 
+                    Foreground="White" 
+                    Background="#611B98">8
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="3" Grid.Column="3" 
+                     Command="{Binding Nine}" CommandParameter="9"
+                    Width="70" 
+                    Height="70" 
+                    FontSize="38" 
+                    Foreground="White" 
+                    Background="#611B98">9
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="4" Grid.Column="1"                      
+                    Command="{Binding ClearText}" CommandParameter=""
+                    Width="70" 
+                    Height="70" 
+                    FontSize="34" 
+                    FontWeight="Bold"
+                    Foreground="Red" 
+                    Background="#611B98">
+                <Label Content="X" Foreground="Red"></Label>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                    <Style TargetType="AccessText">
+                        <Setter Property="TextAlignment" Value="Center"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="4" Grid.Column="2"  
+                     Command="{Binding Zero}" CommandParameter="0"
+                    Width="70" 
+                    Height="70" 
+                    FontSize="38" 
+                    Foreground="White" 
+                    Background="#611B98">0
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="4" Grid.Column="3"     
+                    
+                    Width="70" 
+                    Height="70" 
+                    FontSize="48" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"                   
+                    Foreground="White"                                     
+                    Background="White"
+                    BorderThickness="32" BorderBrush="#390166">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Margin="50,80,0,0"  
+                    Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="4" 
+                    FontSize="22"  Foreground="White" Background="#A9A9A9"
+                    Width="130" Height="80">
+                Next
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="0,7,7,0"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>
